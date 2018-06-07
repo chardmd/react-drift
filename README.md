@@ -2,7 +2,7 @@
 
 React component implementation of Drift Chatbot Widget
 
-![Alt Text](screenshot.png)
+![Alt Text](https://raw.githubusercontent.com/chardmd/react-drift/master/screenshot.png)
 
 ### Install
 
