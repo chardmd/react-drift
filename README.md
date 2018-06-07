@@ -4,6 +4,12 @@ React component implementation of Drift Chatbot Widget
 
 ![Alt Text](screenshot.png)
 
+### Install
+
+```
+npm install react-driftjs
+```
+
 ### Usage
 
 ```javascript
