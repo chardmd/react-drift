@@ -1,6 +1,6 @@
 # React-Drift
 
-## React component implementation of Drift Chatbot Widget
+React component implementation of Drift Chatbot Widget
 
 ![Alt Text](screenshot.png)
 
@@ -13,3 +13,7 @@ import Drift from 'react-driftjs'
 ```
 
 More information can be found here: https://www.drift.com/
+
+### License
+
+MIT
