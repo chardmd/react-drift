@@ -24,7 +24,7 @@ import Drift from 'react-driftjs'
 
 <Drift appId="xxxxx" 
   userId="1234"
-  attributes={email: 'user@example.com', company: 'Acme Inc'}
+  attributes={{ email: "user@example.com", company: "Acme Inc" }}
 />
   
 ```
