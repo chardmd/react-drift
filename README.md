@@ -18,7 +18,7 @@ import Drift from 'react-driftjs'
 <Drift appId="xxxxx" />  //get the appId from drift.com
 ```
 
-#### Identify Users
+### Identify Users
 
 ```javascript
 
