@@ -9,10 +9,16 @@ class Drift extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  componentWillMount() {
+  
+  insertScript(scriptText) {
     const script = document.createElement("script");
-    script.innerText = `!function() {
+    script.innerText = script_text;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+  
+  addMainScript() {
+    const scriptText = `!function() {
         var t = window.driftt = window.drift = window.driftt || [];
         if (!t.init) {
           if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
@@ -34,8 +40,24 @@ class Drift extends React.Component {
       }();
       drift.SNIPPET_VERSION = '0.3.1';
       drift.load('${this.props.appId}');`;
-    script.async = true;
-    document.body.appendChild(script);
+    
+    insertScript(scriptText);
+  }
+  
+  addIdentityVariables() {
+    if (typeof this.props.userId != 'undefined') {
+      let scriptText = `
+        var t = window.driftt = window.drift = window.driftt || [];
+        drift.identify('${this.props.userId}', '${this.props.attributes}')
+      `;
+      
+      insertScript(scriptText);
+    }
+  }
+
+  componentWillMount() {
+    addMainScript();
+    addIdentityVariables();
   }
 
   render() {
