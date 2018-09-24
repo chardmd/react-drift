@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const propTypes = {
-  appId: PropTypes.string.isRequired
-};
-
 class Drift extends React.Component {
   constructor(props) {
     super(props);
+
+    this.addMainScript = this.addMainScript.bind(this);
+    this.addIdentityVariables = this.addIdentityVariables.bind(this);
   }
 
   insertScript(scriptText) {
@@ -45,7 +44,7 @@ class Drift extends React.Component {
   }
 
   addIdentityVariables() {
-    if (typeof this.props.userId != "undefined") {
+    if (!typeof this.props.userId) {
       let scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
         drift.identify('${this.props.userId}', '${this.props.attributes}')
@@ -55,14 +54,19 @@ class Drift extends React.Component {
   }
 
   componentDidMount() {
-    addMainScript();
-    addIdentityVariables();
+    this.addMainScript();
+    this.addIdentityVariables();
   }
 
   render() {
     return "";
   }
 }
+
+const propTypes = {
+  appId: PropTypes.string.isRequired,
+  attributes: PropTypes.object
+};
 
 Drift.propTypes = propTypes;
 
