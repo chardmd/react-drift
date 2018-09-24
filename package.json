@@ -1,6 +1,6 @@
 {
   "name": "react-driftjs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "React component implementation of Drift Chatbot Widget",
   "homepage": "https://github.com/chardmd/react-drift",
   "keywords": [

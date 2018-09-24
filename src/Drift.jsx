@@ -9,14 +9,14 @@ class Drift extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   insertScript(scriptText) {
     const script = document.createElement("script");
-    script.innerText = script_text;
+    script.innerText = scriptText;
     script.async = true;
     document.body.appendChild(script);
   }
-  
+
   addMainScript() {
     const scriptText = `!function() {
         var t = window.driftt = window.drift = window.driftt || [];
@@ -40,22 +40,21 @@ class Drift extends React.Component {
       }();
       drift.SNIPPET_VERSION = '0.3.1';
       drift.load('${this.props.appId}');`;
-    
+
     insertScript(scriptText);
   }
-  
+
   addIdentityVariables() {
-    if (typeof this.props.userId != 'undefined') {
+    if (typeof this.props.userId != "undefined") {
       let scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
         drift.identify('${this.props.userId}', '${this.props.attributes}')
       `;
-      
       insertScript(scriptText);
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     addMainScript();
     addIdentityVariables();
   }
