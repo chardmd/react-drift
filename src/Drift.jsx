@@ -7,6 +7,7 @@ class Drift extends React.Component {
 
     this.addMainScript = this.addMainScript.bind(this);
     this.addIdentityVariables = this.addIdentityVariables.bind(this);
+    this.insertScript = this.insertScript.bind(this);
   }
 
   insertScript(scriptText) {
@@ -40,7 +41,7 @@ class Drift extends React.Component {
       drift.SNIPPET_VERSION = '0.3.1';
       drift.load('${this.props.appId}');`;
 
-    insertScript(scriptText);
+    this.insertScript(scriptText);
   }
 
   addIdentityVariables() {
@@ -49,7 +50,7 @@ class Drift extends React.Component {
         var t = window.driftt = window.drift = window.driftt || [];
         drift.identify('${this.props.userId}', '${this.props.attributes}')
       `;
-      insertScript(scriptText);
+      this.insertScript(scriptText);
     }
   }
 
