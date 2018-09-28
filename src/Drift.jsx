@@ -55,8 +55,10 @@ class Drift extends React.Component {
   }
 
   componentDidMount() {
-    this.addMainScript();
-    this.addIdentityVariables();
+    if (typeof window !== "undefined") {
+      this.addMainScript();
+      this.addIdentityVariables();
+    }
   }
 
   render() {
