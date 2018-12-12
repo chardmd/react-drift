@@ -45,7 +45,7 @@ class Drift extends React.Component {
   }
 
   addIdentityVariables() {
-    if (!typeof this.props.userId) {
+    if (typeof this.props.userId !== "undefined") {
       let scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
         drift.identify('${this.props.userId}', '${this.props.attributes}')
@@ -55,7 +55,7 @@ class Drift extends React.Component {
   }
 
   componentDidMount() {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       this.addMainScript();
       this.addIdentityVariables();
     }
