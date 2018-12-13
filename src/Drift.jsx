@@ -48,7 +48,7 @@ class Drift extends React.Component {
     if (typeof this.props.userId !== "undefined") {
       let scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
-        drift.identify('${this.props.userId}', '${this.props.attributes}')
+        drift.identify('${this.props.userId}', ${JSON.stringify(this.props.attributes)})
       `;
       this.insertScript(scriptText);
     }
