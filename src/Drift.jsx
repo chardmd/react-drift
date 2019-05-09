@@ -7,7 +7,9 @@ class Drift extends React.Component {
 
     this.addMainScript = this.addMainScript.bind(this);
     this.addIdentityVariables = this.addIdentityVariables.bind(this);
-    this.insertScript = this.insertScript.bind(this);
+    this.
+      
+      = this.insertScript.bind(this);
   }
 
   insertScript(scriptText) {
@@ -61,6 +63,22 @@ class Drift extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    drift && drift.reset()
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (drift && (
+        prevProps.userId !== this.props.userId ||
+        prevProps.attributes !== this.props.attributes
+    )) {
+        drift.reset()
+        if (this.props.userId) {
+          drift.identify('${this.props.userId}', ${JSON.stringify(this.props.attributes)})
+        }
+    }
+  }
+  
   render() {
     return "";
   }
@@ -68,6 +86,7 @@ class Drift extends React.Component {
 
 const propTypes = {
   appId: PropTypes.string.isRequired,
+  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   attributes: PropTypes.object
 };
 
