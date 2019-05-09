@@ -70,9 +70,12 @@ class Drift extends React.Component {
         prevProps.userId !== this.props.userId ||
         prevProps.attributes !== this.props.attributes
     )) {
-        drift.reset()
         if (this.props.userId) {
-          drift.identify(`${this.props.userId}`, ${JSON.stringify(this.props.attributes)})
+          drift.identify(
+            `${this.props.userId}`, `${JSON.stringify(this.props.attributes)}`
+          )
+        } else if(prevProps.userId) {
+          drift.reset()
         }
     }
   }
