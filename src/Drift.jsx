@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
 class Drift extends React.Component {
@@ -48,21 +48,23 @@ class Drift extends React.Component {
     if (typeof this.props.userId !== "undefined") {
       let scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
-        drift.identify('${this.props.userId}', ${JSON.stringify(this.props.attributes)})
+        drift.identify('${this.props.userId}', ${JSON.stringify(
+        this.props.attributes
+      )})
       `;
       this.insertScript(scriptText);
     }
   }
 
   componentDidMount() {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !window.drift) {
       this.addMainScript();
       this.addIdentityVariables();
     }
   }
 
   render() {
-    return "";
+    return <Fragment />;
   }
 }
 
