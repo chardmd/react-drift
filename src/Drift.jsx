@@ -7,6 +7,7 @@ class Drift extends React.Component {
 
     this.addMainScript = this.addMainScript.bind(this);
     this.addAttributes = this.addAttributes.bind(this);
+    this.addEventHandlers = this.addEventHandlers.bind(this);
     this.insertScript = this.insertScript.bind(this);
   }
 
@@ -65,10 +66,22 @@ class Drift extends React.Component {
     }
   }
 
+  addEventHandlers() {
+    if(this.props.eventHandlers && Array.isArray(this.props.eventHandlers)) {
+      this.props.eventHandlers.forEach(handler => {
+        let scriptText = `
+        drift.on('${handler.event}', ${handler.function});
+        `;
+        this.insertScript(scriptText)
+      });
+    }
+  }
+
   componentDidMount() {
     if (typeof window !== "undefined" && !window.drift) {
       this.addMainScript();
       this.addAttributes();
+      this.addEventHandlers();
     }
   }
 
@@ -79,7 +92,8 @@ class Drift extends React.Component {
 
 const propTypes = {
   appId: PropTypes.string.isRequired,
-  attributes: PropTypes.object
+  attributes: PropTypes.object,
+  eventHandlers: PropTypes.array
 };
 
 Drift.propTypes = propTypes;
