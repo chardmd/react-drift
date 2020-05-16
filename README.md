@@ -43,7 +43,7 @@ To handle the events, assign an array of objects to the eventHandlers property. 
   ]}
 />;
 
-var handleInteraction = function () {
+const handleInteraction = function () {
   console.log("User has just interacted with the chatbot");
 };
 ```
