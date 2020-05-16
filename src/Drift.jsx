@@ -9,6 +9,8 @@ class Drift extends React.Component {
     this.addAttributes = this.addAttributes.bind(this);
     this.addEventHandlers = this.addEventHandlers.bind(this);
     this.insertScript = this.insertScript.bind(this);
+    this.createStyleString = this.createStyleString.bind(this);
+    this.addCustomStyle = this.addCustomStyle.bind(this);
   }
 
   insertScript(scriptText) {
@@ -23,7 +25,7 @@ class Drift extends React.Component {
         var t = window.driftt = window.drift = window.driftt || [];
         if (!t.init) {
           if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-          t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on", "setUserAttributes" ], 
+          t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on", "setUserAttributes" ],
           t.factory = function(e) {
             return function() {
               var n = Array.prototype.slice.call(arguments);
@@ -46,7 +48,7 @@ class Drift extends React.Component {
   }
 
   addAttributes() {
-    let scriptText = ''
+    let scriptText = "";
     if (typeof this.props.userId !== "undefined") {
       scriptText = `
         var t = window.driftt = window.drift = window.driftt || [];
@@ -55,8 +57,7 @@ class Drift extends React.Component {
       )})
       `;
       this.insertScript(scriptText);
-    }
-    else if(this.props.attributes) {
+    } else if (this.props.attributes) {
       scriptText = `
         drift.on('ready', function() {
           drift.api.setUserAttributes(${JSON.stringify(this.props.attributes)})
@@ -67,13 +68,38 @@ class Drift extends React.Component {
   }
 
   addEventHandlers() {
-    if(this.props.eventHandlers && Array.isArray(this.props.eventHandlers)) {
-      this.props.eventHandlers.forEach(handler => {
+    if (this.props.eventHandlers && Array.isArray(this.props.eventHandlers)) {
+      this.props.eventHandlers.forEach((handler) => {
         let scriptText = `
         drift.on('${handler.event}', ${handler.function});
         `;
-        this.insertScript(scriptText)
+        this.insertScript(scriptText);
       });
+    }
+  }
+
+  createStyleString() {
+    return Object.keys(this.props.style).reduce((styleString, styleName) => {
+      const styleValue = this.props.style[styleName];
+
+      styleName = styleName.replace(
+        /[A-Z]/g,
+        (match) => `-${match.toLowerCase()}`
+      );
+
+      return `${styleString}${styleName}: ${styleValue} !important;`;
+    }, "");
+  }
+
+  addCustomStyle() {
+    if (this.props.style) {
+      const style = document.createElement("style");
+      document.head.appendChild(style);
+      style.innerText = `
+        iframe#drift-widget {
+          ${this.createStyleString()}
+        }
+      `;
     }
   }
 
@@ -82,6 +108,7 @@ class Drift extends React.Component {
       this.addMainScript();
       this.addAttributes();
       this.addEventHandlers();
+      this.addCustomStyle();
     }
   }
 
@@ -93,7 +120,8 @@ class Drift extends React.Component {
 const propTypes = {
   appId: PropTypes.string.isRequired,
   attributes: PropTypes.object,
-  eventHandlers: PropTypes.array
+  eventHandlers: PropTypes.array,
+  style: PropTypes.object,
 };
 
 Drift.propTypes = propTypes;
