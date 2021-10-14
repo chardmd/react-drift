@@ -13,6 +13,7 @@
     "url": "https://github.com/chardmd/react-drift"
   },
   "main": "./lib/Drift.js",
+  "types": "./lib/Drift.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "webpack"
