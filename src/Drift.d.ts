@@ -2,9 +2,10 @@ import React from "react";
 
 export interface DriftProps {
   appId: string;
-  attributes?: any;
+  userId?: string;
+  attributes?: { [name: string]: any };
   eventHandlers?: { event: string; function: () => void }[];
-  style?: any;
+  style?: { [name: string]: any };
 }
 
 export default class Drift extends React.Component {
