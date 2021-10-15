@@ -119,6 +119,7 @@ class Drift extends React.Component {
 
 const propTypes = {
   appId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
   attributes: PropTypes.object,
   eventHandlers: PropTypes.array,
   style: PropTypes.object,
