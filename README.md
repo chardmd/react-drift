@@ -1,6 +1,6 @@
 # React-Drift
 
-React component implementation of Drift Chatbot Widget
+React component implementation of Drift Chatbot Widget.
 
 ![Alt Text](https://raw.githubusercontent.com/chardmd/react-drift/master/screenshot.png)
 
@@ -20,7 +20,7 @@ import Drift from "react-driftjs";
 
 ### Identify User / Assign Attributes
 
-To identify the user with an ID that is unique in your application, include a userId property with that value. This will trigger the chatbot to use the `identify` method method. If the userId is omitted, the component will have the chatbot use the `setUserAttributes` method.
+To identify the user with an ID that is unique in your application, include a `userId` property with that value. This will trigger the chatbot to use the `identify` method. If `userId` is omitted, the component will have the chatbot use the `setUserAttributes` method.
 
 ```javascript
 <Drift
@@ -62,6 +62,10 @@ To add custom styling to the root `<iframe>` element (e.g. to change the positio
 ```
 
 More information can be found here: https://www.drift.com/
+
+### TypeScript
+
+Includes TypeScript definitions.
 
 ### License
 
