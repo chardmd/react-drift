@@ -61,11 +61,13 @@ To add custom styling to the root `<iframe>` element (e.g. to change the positio
 />
 ```
 
-More information can be found here: https://www.drift.com/
-
 ### TypeScript
 
 Includes TypeScript definitions.
+
+### About Drift
+
+More information can be found here: https://www.drift.com/
 
 ### License
 
